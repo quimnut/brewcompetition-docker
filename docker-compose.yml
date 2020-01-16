@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./appdata/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    network_mode: bridge
+
+  brewcompetitiononlineentry:
+    image: quimnut/brewcompetition-http-smtp:latest
+    volumes:
+      - ./appdata/app:/data
+    environment:
+      - ADMIN_EMAIL=your@email.yay
+      - ADMIN_PASS=pa$try$t00tS
+      - MAIL_FROM=noreply@yourclub.com.au
+      - SMTP_HOST=smtp.mailgun.org
+      - SMTP_AUTH=TRUE
+      - SMTP_USER=postmaster@mg.yourclub.com.au
+      - SMTP_PASS=pa$try$t00tS
+      - SMTP_SEC=tls
+      - SMTP_PORT=587
+      - TZ=Australia/Brisbane
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=bridge
+      - traefik.http.routers.brewcompetitiononlineentry.rule=Host(`your.brew.comp.web.site.beer`)
+      - traefik.http.routers.brewcompetitiononlineentry.entrypoints=web
+      - traefik.http.routers.brewcompetitiononlineentry.middlewares=brewcompetitiononlineentry_redirect2https      
+      - traefik.http.routers.brewcompetitiononlineentry_secure.rule=Host(`your.brew.comp.web.site.beer`)
+      - traefik.http.routers.brewcompetitiononlineentry_secure.entrypoints=websecure      
+      - traefik.http.routers.brewcompetitiononlineentry_secure.tls.certresolver=tlsChallenge_letsencrypt
+      - traefik.http.middlewares.brewcompetitiononlineentry_redirect2https.redirectscheme.scheme=https
+    network_mode: bridge

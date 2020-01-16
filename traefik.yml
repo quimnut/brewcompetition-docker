@@ -1,0 +1,19 @@
+global:
+  checkNewVersion: true
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: bridge
+
+certificatesResolvers:
+  tlsChallenge_letsencrypt:
+    acme:
+      email: your.cert.email@you.com
+      storage: /acme.json
+      tlsChallenge: {}
