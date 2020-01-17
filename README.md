@@ -17,12 +17,13 @@ A (sub)domain name to use (possibly free).
 A SMTP email account for sending email (possibly free, or mailgun).
 
 ## Usage
-- Ensure docker and git is installed (linux 64bit image recommended)
+- Ensure docker and git is installed.
 - Clone the configuration with git `git clone https://github.com/quimnut/brewcompetition-docker.git`
 - `chmod 600 ./appdata/acme.json`
 - Edit all of the environment variables in docker-compse.yml ensuring you do not miss the the 2 traefik labels containing the the DNS of your web site 
-- Edit traefik.yml and put in an email for the LetsEncrypt SSL cert.
-- Make sure DNS works and your FW is confiugred to allow 80 and 443.
+- Edit traefik.yml and update the email for your LetsEncrypt SSL cert.
+- Make sure your DNS works and your firewall is confiugred to allow ports 80 and 443.
+- `docker-compose up -s`
 
 The ADMIN credentials are only applied when the database is first created.
 
