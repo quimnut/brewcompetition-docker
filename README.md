@@ -32,3 +32,6 @@ The SMTP settings are applied when started.
 Wait a minute or 2 for the SSL cert to be installed if you see SSL errors. 
 
 Check the logs via docker, or in the appdata folder.
+
+## Known Issues
+Does not support non-typical ports (80 and 443 only).
