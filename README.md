@@ -11,7 +11,9 @@ This project aims to help home brew clubs quickly deploy a competition website.
 
 ## Requirements
 A docker environment ($5/m VPS, home NAS).
+
 A (sub)domain name to use (possibly free).
+
 A SMTP email account for sending email (possibly free, or mailgun).
 
 ## Usage
