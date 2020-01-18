@@ -20,7 +20,7 @@ A SMTP email account for sending email (possibly free, or mailgun).
 - Ensure docker and git is installed.
 - Clone the configuration with git `git clone https://github.com/quimnut/brewcompetition-docker.git`
 - `chmod 600 ./appdata/acme.json`
-- Edit all of the environment variables in docker-compose.yml ensuring you do not miss the the 2 traefik labels containing the the DNS of your web site 
+- Edit all of the environment variables in docker-compose.yml ensuring you do not miss the the 2 traefik labels containing the DNS hostname of your web site 
 - Edit traefik.yml and update the email for your LetsEncrypt SSL cert.
 - Make sure your DNS works and your firewall is confiugred to allow ports 80 and 443.
 - `docker-compose up -d`
