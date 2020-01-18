@@ -22,7 +22,7 @@ A SMTP email account for sending email (possibly free, or mailgun).
 - `chmod 600 ./appdata/acme.json`
 - Edit all of the environment variables in docker-compose.yml ensuring you do not miss the the 2 traefik labels containing the DNS hostname of your web site 
 - Edit traefik.yml and update the email for your LetsEncrypt SSL cert.
-- Make sure your DNS works and your firewall is confiugred to allow ports 80 and 443.
+- Make sure your DNS works and your firewall is configured to allow ports 80 and 443.
 - `docker-compose up -d`
 
 The ADMIN credentials are only applied when the database is first created.
