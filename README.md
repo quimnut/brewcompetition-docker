@@ -17,7 +17,7 @@ A (sub)domain name to use (possibly free).
 A SMTP email account for sending email (possibly free, or mailgun).
 
 ## Usage
-- Ensure docker and git is installed.
+- Ensure docker and git are installed.
 - Clone the configuration with git `git clone https://github.com/quimnut/brewcompetition-docker.git`
 - `chmod 600 ./appdata/acme.json`
 - Edit all of the environment variables in docker-compose.yml ensuring you do not miss the the 2 traefik labels containing the DNS hostname of your web site 
