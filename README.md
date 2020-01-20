@@ -1,7 +1,7 @@
 # brewcompetition-docker
 Docker compose for [https://github.com/geoffhumphrey/brewcompetitiononlineentry/](https://github.com/geoffhumphrey/brewcompetitiononlineentry/) using traefik for SSL automation.
 
-Currently on the mater branch but aiming for a 2.1.19 tagged release. 
+Currently on the master branch but aiming for a 2.1.19 tagged release. 
 
 As of 2.1.18 [brewcompetitiononlineentry](https://github.com/geoffhumphrey/brewcompetitiononlineentry/) supports SMTP email. 
 
