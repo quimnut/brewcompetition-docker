@@ -14,17 +14,20 @@ services:
     network_mode: bridge
 
   brewcompetitiononlineentry:
-    image: quimnut/brewcompetition-http-smtp:latest
+    build:
+      context: ./brewcompetition-http-smtp/
+      dockerfile: Dockerfile
+    image: brewcompetition-http-smtp
     volumes:
       - ./appdata/app:/data
     environment:
       - ADMIN_EMAIL=your@email.yay
-      - ADMIN_PASS=pa$try$t00tS
+      - ADMIN_PASS=paStrySt00tS
       - MAIL_FROM=noreply@yourclub.com.au
       - SMTP_HOST=smtp.mailgun.org
       - SMTP_AUTH=TRUE
       - SMTP_USER=postmaster@mg.yourclub.com.au
-      - SMTP_PASS=pa$try$t00tS
+      - SMTP_PASS=paStrySt00tS
       - SMTP_SEC=tls
       - SMTP_PORT=587
       - TZ=Australia/Brisbane

@@ -1,0 +1,3 @@
+#!/bin/sh
+test -e /var/run/mysqld || mkdir /var/run/mysqld ; chmod 777 /var/run/mysqld
+exec /usr/bin/mysqld_safe > /dev/null 2>&1
