@@ -1,5 +1,9 @@
 # brewcompetition-http-smtp
 
+http image for use behind an edge router like traefik.
+
+https://hub.docker.com/repository/docker/quimnut/brewcompetition-http-smtp
+
 ```
 docker run -d \
   -p 80:80 \
@@ -15,6 +19,4 @@ docker run -d \
   -e SMTP_PORT=587 \
   -e TZ=Australia/Brisbane \
   <image>:<tag>
-
-recommend to use with traefik.
 ```
