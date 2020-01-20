@@ -8,11 +8,6 @@ fi
 if [ ! -e /data/logs ]; then cp -pr /data.skel/logs /data/ ; fi
 if [ ! -e /data/bcoem ]; then cp -pr /data.skel/bcoem /data/ ; fi
 
-sed -i 's/^\$prefix =.*/\$prefix = "baseline_";/' /var/www/html/site/config.php
-sed -i 's/^\$username =.*/\$username = "beercomp";/' /var/www/html/site/config.php
-sed -i "s/^\$password =.*/\$password = \"$(cat /data/database/rando)\";/" /var/www/html/site/config.php
-sed -i 's/^\$database =.*/\$database = "beercomp";/' /var/www/html/site/config.php
-
 sed -i "s/^\$mail_default_from =.*/\$mail_default_from = '${MAIL_FROM}';/" /var/www/html/site/config.mail.php
 sed -i "s/^\$smtp_host =.*/\$smtp_host = '${SMTP_HOST}';/" /var/www/html/site/config.mail.php
 sed -i "s/^\$smtp_auth =.*/\$smtp_auth = '${SMTP_AUTH}';/" /var/www/html/site/config.mail.php
