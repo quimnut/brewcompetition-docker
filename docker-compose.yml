@@ -8,6 +8,7 @@ services:
       - "443:443"
     volumes:
       - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik_dynamic.yml:/etc/traefik/traefik_dynamic.yml
       - ./appdata/acme.json:/acme.json
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped

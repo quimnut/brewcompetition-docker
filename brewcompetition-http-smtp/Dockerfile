@@ -11,8 +11,9 @@ COPY init_scripts/apache2 /etc/service/apache2/run
 COPY init_scripts/mysql /etc/service/mysql/run
 COPY init_scripts/delayed-mysql.sh /usr/local/bin/
 COPY init_scripts/get_hash.php /usr/local/bin/
+COPY init_scripts/local-libs.sh /usr/local/bin/
 
-RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl git
+RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl git wget unzip
 
 COPY init_scripts/beercomp-http.conf /etc/apache2/sites-available/
 
@@ -24,7 +25,8 @@ RUN mv /var/log/apache2 /data/logs/ \
   && mv /var/log/mysql /data/logs/ \
   && ln -s /data/logs/mysql /var/log/ \
   && mv /var/lib/mysql* /data/database/ \
-  && find /data/database/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/lib/ \;
+  && find /data/database/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/lib/ \; \
+  && sed -i 's/;extension=mbstring/extension=mbstring/g' /etc/php/7.2/apache2/php.ini
 
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
@@ -35,8 +37,13 @@ RUN rm -rf * \
   && mv site /data/bcoem/ \
   && ln -s /data/bcoem/site /var/www/html/ \
   && mv user_* /data/bcoem/ \
-  && find /data/bcoem/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/www/html/ \; \
-  && chown -R www-data.www-data /var/www /data/bcoem
+  && find /data/bcoem/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/www/html/ \;
+
+RUN cd /var/www/html/ \
+  && /usr/local/bin/local-libs.sh \
+  && sed -i "s/define('CDN'.*/define('CDN', FALSE);/" paths.php
+
+RUN chown -R www-data.www-data /var/www /data/bcoem
 
 # workaround for login and mod rewrite issues when not using ssl & enable smtp - as of 2.1.19pre
 RUN sed -i 's/RewriteRule (\.\*) https.*/#/' /var/www/html/.htaccess \

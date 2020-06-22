@@ -10,6 +10,9 @@ providers:
   docker:
     exposedByDefault: false
     network: bridge
+  file:
+    filename: /etc/traefik/traefik_dynamic.yml
+
 
 certificatesResolvers:
   tlsChallenge_letsencrypt:
