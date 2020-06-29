@@ -12,7 +12,7 @@
 #  "GoldCLUB|GoldCLUB", \
 #  "Fraser Coast Bayside Brewers|Fraser Coast Bayside Brewers", \
 #  "Central Queensland Craft Brewers (CQCB)|Central Queensland Craft Brewers (CQCB)", \
-#  "Brisbane Brewers Club (BBC)|"Brisbane Brewers Club (BBC)", \
+#  "Brisbane Brewers Club (BBC)|Brisbane Brewers Club (BBC)", \
 #  "Brisbane Amateur Beer Brewers (BABBS)|Brisbane Amateur Beer Brewers (BABBS)" \
 #);/' /var/www/html/includes/constants.inc.php
 
