@@ -12,6 +12,7 @@ COPY init_scripts/mysql /etc/service/mysql/run
 COPY init_scripts/delayed-mysql.sh /usr/local/bin/
 COPY init_scripts/get_hash.php /usr/local/bin/
 COPY init_scripts/local-libs.sh /usr/local/bin/
+COPY init_scripts/custom.sh /usr/local/bin/
 
 RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl git wget unzip
 
@@ -39,9 +40,10 @@ RUN rm -rf * \
   && mv user_* /data/bcoem/ \
   && find /data/bcoem/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/www/html/ \;
 
-RUN cd /var/www/html/ \
-  && /usr/local/bin/local-libs.sh \
-  && sed -i "s/define('CDN'.*/define('CDN', FALSE);/" paths.php
+# this has bugs currently
+#RUN cd /var/www/html/ \
+#  && /usr/local/bin/local-libs.sh \
+#  && sed -i "s/define('CDN'.*/define('CDN', FALSE);/" paths.php
 
 RUN chown -R www-data.www-data /var/www /data/bcoem
 

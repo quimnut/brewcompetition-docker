@@ -8,6 +8,9 @@ fi
 if [ ! -e /data/logs ]; then cp -pr /data.skel/logs /data/ ; fi
 if [ ! -e /data/bcoem ]; then cp -pr /data.skel/bcoem /data/ ; fi
 
+if [ ! -e /data/custom.sh ]; then cp -pr /usr/local/bin/custom.sh /data/ ; fi
+/data/custom.sh 
+
 sed -i "s/^\$mail_default_from =.*/\$mail_default_from = '${MAIL_FROM}';/" /var/www/html/site/config.mail.php
 sed -i "s/^\$smtp_host =.*/\$smtp_host = '${SMTP_HOST}';/" /var/www/html/site/config.mail.php
 sed -i "s/^\$smtp_auth =.*/\$smtp_auth = '${SMTP_AUTH}';/" /var/www/html/site/config.mail.php

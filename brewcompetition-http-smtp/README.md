@@ -4,6 +4,12 @@ http image for use behind an edge router like traefik.
 
 https://hub.docker.com/repository/docker/quimnut/brewcompetition-http-smtp
 
+To import a previos comps db;
+After running once to initialise, remove database directory and leave a file called loadme.sql in appdata/app/
+
+To customise bcoe&m source (like clubs list) so it's persistant across restarts
+edit custom.sh in appdata/app/
+
 ```
 docker run -d \
   -p 80:80 \
