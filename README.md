@@ -27,10 +27,13 @@ A SMTP email account for sending email (possibly free, or mailgun).
 - Make sure your DNS works and your firewall is configured to allow ports 80 and 443.
 - `docker-compose build`
 - `docker-compose up -d`
+- The first time you run this, if you are a new install appdata/app/ will be populated where the persistent data will be stored
+- Now you can stop the container and edit custom.sh, I do this to overwrite the clubs list, as the php code is inside the container image and not persistent.
+- to load a database export with any prefix, remove the appdata/app/database directory and copy the dump to appdata/app/loadme.sql, and start the container.
 
-The ADMIN credentials are only applied when the database is first created.
+The ADMIN credentials are only applied when a baseline database is first created.
 
-The SMTP settings are applied when started.
+The SMTP settings are applied every start.
 
 Wait a minute or 2 for the SSL cert to be installed if you see SSL errors. 
 
@@ -38,5 +41,3 @@ Check the logs via docker, or in the appdata folder.
 
 ## Known Issues
 Does not support non-typical ports (80 and 443 only).
-
-If the master branch does not work use the quimnut/brewcompetition-docker image instead of building for now.
