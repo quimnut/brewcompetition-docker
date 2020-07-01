@@ -14,7 +14,7 @@ COPY init_scripts/get_hash.php /usr/local/bin/
 COPY init_scripts/local-libs.sh /usr/local/bin/
 COPY init_scripts/custom.sh /usr/local/bin/
 
-RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl git wget unzip
+RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl php7.2-mbstring git wget unzip
 
 COPY init_scripts/beercomp-http.conf /etc/apache2/sites-available/
 
@@ -40,22 +40,18 @@ RUN rm -rf * \
   && mv user_* /data/bcoem/ \
   && find /data/bcoem/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/www/html/ \;
 
-# this has bugs currently
+# this has bugs, needs work
 #RUN cd /var/www/html/ \
 #  && /usr/local/bin/local-libs.sh \
 #  && sed -i "s/define('CDN'.*/define('CDN', FALSE);/" paths.php
 
 RUN chown -R www-data.www-data /var/www /data/bcoem
 
-# workaround for login and mod rewrite issues when not using ssl & enable smtp - as of 2.1.19pre
-RUN sed -i 's/RewriteRule (\.\*) https.*/#/' /var/www/html/.htaccess \
-  && sed -i "s/define('ENABLE_MAILER.*/define('ENABLE_MAILER', TRUE);/" /var/www/html/paths.php
+# workaround for login and mod rewrite issues when not using ssl - we need this to be predictible behind traefik
+RUN sed -i 's/RewriteRule (\.\*) https.*/#/' /var/www/html/.htaccess 
 
-# workaround for using the master branch 2.1.19pre as of 17/Jan/2020
-RUN sed -i "s/define('TESTING'.*/define('TESTING', FALSE);/" /var/www/html/paths.php \
-  && sed -i "s/define('DEBUG'.*/define('DEBUG', FALSE);/" /var/www/html/paths.php \
-  && sed -i "s/define('DEBUG_SESSION_VARS'.*/define('DEBUG_SESSION_VARS', FALSE);/" /var/www/html/paths.php \
-  && sed -i "s/))))/)))/" /var/www/html/includes/process/process_users_register.inc.php
+# this enabled the easy use of containers, ultimatly
+RUN sed -i "s/define('ENABLE_MAILER.*/define('ENABLE_MAILER', TRUE);/" /var/www/html/paths.php
 
 WORKDIR "/data"
 
