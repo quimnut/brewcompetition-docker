@@ -17,7 +17,8 @@ mkdir -p /var/www/html/classes/htmlpurifier/standalone/HTMLPurifier/DefinitionCa
 chown www-data.www-data /var/www/html/classes/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer
 
 # breaks barcode check in, ssl logic in app code boohoo
-sed -i 's/^if (is_https/#if (is_https/' /var/www/html/site/config.php
+# we're a http server with a ssl proxy
+sed -i 's|^$base_url = "http://";|$base_url = "https://";|' /var/www/html/site/config.php
 
 # 2.2.0 tag needed this change
 grep -q styles.inc.php /var/www/html/includes/db/common.db.php || sed -i "5 a require_once (INCLUDES.'styles.inc.php');" /var/www/html/includes/db/common.db.php
