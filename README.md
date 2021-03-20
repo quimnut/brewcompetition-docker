@@ -1,9 +1,7 @@
 # brewcompetition-docker
 Docker compose for [https://github.com/geoffhumphrey/brewcompetitiononlineentry/](https://github.com/geoffhumphrey/brewcompetitiononlineentry/) using traefik for SSL automation.
 
-Currently on the master branch but aiming for a 2.1.19 tagged release. 
-
-As of 2.1.18 [brewcompetitiononlineentry](https://github.com/geoffhumphrey/brewcompetitiononlineentry/) supports SMTP email. 
+As of 2.1.18 [brewcompetitiononlineentry](https://github.com/geoffhumphrey/brewcompetitiononlineentry/) supports SMTP email.
 
 This docker stack will deploy a baseline_ database on apache2 using the ADMIN_ credentials for the admin user.
 
@@ -12,11 +10,11 @@ It is a work in progress and any contributions are welcome.
 This project aims to help home brew clubs quickly deploy a competition website.
 
 ## Requirements
-A docker environment ($5/m VPS, home NAS).
+A docker environment ($5/m VPS, home NAS, aws/oci/gcs/m$ cloud free tier).
 
-A (sub)domain name to use (possibly free).
+A (sub)domain name to use (possibly free also).
 
-A SMTP email account for sending email (possibly free, or mailgun).
+A SMTP email account for sending email (possibly free like mailgun).
 
 ## Usage
 - Ensure docker, docker-compose and git are installed.
