@@ -31,9 +31,9 @@ RUN mv /var/log/apache2 /data/logs/ \
 
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
-# aim for 2.1.19 tag next
-  && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
-#  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.1.19 | tar --strip-components=1 -xvzf - -C . \
+#  && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
+# 2.2.0 + a patch for https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1202
+  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.2.0 | tar --strip-components=1 -xvzf - -C . \
   && rm -rf .github .git \
   && mv site /data/bcoem/ \
   && ln -s /data/bcoem/site /var/www/html/ \
