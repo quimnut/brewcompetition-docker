@@ -2,6 +2,7 @@
 # put persistant changes in here if you need them.
 
 # you can increase logging by changing this.
+# if you enable these, paypal will go to sandbox url too.
 sed -i "s/define('TESTING'.*/define('TESTING', FALSE);/" /var/www/html/paths.php 
 sed -i "s/define('DEBUG'.*/define('DEBUG', FALSE);/" /var/www/html/paths.php 
 sed -i "s/define('DEBUG_SESSION_VARS'.*/define('DEBUG_SESSION_VARS', FALSE);/" /var/www/html/paths.php 
