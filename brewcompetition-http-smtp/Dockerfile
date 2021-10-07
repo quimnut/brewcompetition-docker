@@ -31,9 +31,9 @@ RUN mv /var/log/apache2 /data/logs/ \
 
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
-# master branch is best today with some critical fixes before 2.2.1
+# master branch is often the goods with some critical fixes before next tag.
   && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
-# 2.2.0 + a patch for https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1202
+# alternativly you can use a tagged release
 #  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.2.0 | tar --strip-components=1 -xvzf - -C . \
   && rm -rf .github .git \
   && mv site /data/bcoem/ \

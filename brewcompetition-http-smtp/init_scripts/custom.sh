@@ -17,7 +17,7 @@ EOF
 mkdir -p /var/www/html/classes/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer
 chown www-data.www-data /var/www/html/classes/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer
 
-# breaks barcode check in, ssl logic in app code boohoo
+# breaks barcode check in, ssl logic in app code
 # we're a http server with a ssl proxy
 sed -i 's|^$base_url = "http://";|$base_url = "https://";|' /var/www/html/site/config.php
 
@@ -26,3 +26,6 @@ if [[ /data.skel/bcoem/site/bootstrap.php -nt /data/bcoem/site/bootstrap.php ]];
   cp /data/bcoem/site/bootstrap.php /data/bcoem/site/bootstrap.php.bak.$(date "+%Y.%m.%d-%H.%M.%S")
   cat /data.skel/bcoem/site/bootstrap.php >/data/bcoem/site/bootstrap.php
 fi
+
+# QABC clubs override, too many in pull down
+sed -i 's|^?>$|$club_array = array\("Sunshine Coast Amateur Brewers \(SCABs\)","Righteous Brewers of Townsville \(RBT\)", "Noosa Home Brew Club", "Peninsula Brewers Union \(PBU\)", "Tuns of Anarchy", "Brisbanes Orchestra of Omitted Brewers \(BOOBS\)", "Western Suburbs Amateur Wine Guild", "Toowoomba Society Of Beer Appreciation \(TooSOBA\)","Small Batch Home Brew Club","SaD Brewers","Pine Rivers Underground Brewing Society \(PUBS\)","Mackay And District \(MAD\) Brewers", "Ipswich Brewers Union \(IBU\)", "GoldCLUB", "Fraser Coast Bayside Brewers", "Central Queensland Craft Brewers \(CQCB\)", "Brisbane Brewers Club \(BBC\)", "Brisbane Amateur Beer Brewers \(BABBs\)"\); asort\($club_array\); ?>|' /var/www/html/includes/constants.inc.php

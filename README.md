@@ -29,7 +29,7 @@ A SMTP email account for sending email (possibly free like mailgun).
 - Now you can stop the container and edit custom.sh, I do this to overwrite the clubs list, as the php code is inside the container image and not persistent.
 - to load a database export with any prefix, remove the appdata/app/database directory and copy the dump to appdata/app/loadme.sql, and start the container.
 
-The ADMIN credentials are only applied when a baseline database is first created.
+The ADMIN credentials are only applied when a baseline database is used to create a new install.
 
 The SMTP settings are applied every start.
 
