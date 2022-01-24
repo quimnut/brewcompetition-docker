@@ -32,9 +32,10 @@ RUN mv /var/log/apache2 /data/logs/ \
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
 # master branch is often the goods with some critical fixes before next tag.
-  && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
+#  && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
 # alternativly you can use a tagged release
 #  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.2.0 | tar --strip-components=1 -xvzf - -C . \
+  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.4.0.3 | tar --strip-components=1 -xvzf - -C . \
   && rm -rf .github .git \
   && mv site /data/bcoem/ \
   && ln -s /data/bcoem/site /var/www/html/ \
