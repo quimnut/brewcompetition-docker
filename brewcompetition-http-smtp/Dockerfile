@@ -31,11 +31,10 @@ RUN mv /var/log/apache2 /data/logs/ \
 
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
-# master branch is often the goods with some critical fixes before next tag.
+#master
 #  && git clone https://github.com/geoffhumphrey/brewcompetitiononlineentry.git . \
-# alternativly you can use a tagged release
-#  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.2.0 | tar --strip-components=1 -xvzf - -C . \
-  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.4.0.3 | tar --strip-components=1 -xvzf - -C . \
+#tag
+  && curl -s https://codeload.github.com/geoffhumphrey/brewcompetitiononlineentry/tar.gz/v2.5.0-beta | tar --strip-components=1 -xvzf - -C . \
   && rm -rf .github .git \
   && mv site /data/bcoem/ \
   && ln -s /data/bcoem/site /var/www/html/ \
@@ -50,7 +49,7 @@ RUN rm -rf * \
 RUN chown -R www-data.www-data /var/www /data/bcoem
 
 # workaround for login and mod rewrite issues when not using ssl - we need this to be predictible behind traefik
-RUN sed -i 's/RewriteRule (\.\*) https.*/#/' /var/www/html/.htaccess 
+RUN sed -i 's/RewriteRule (\.\*) https.*/#/' /var/www/html/.htaccess
 
 # this enabled the easy use of containers, ultimatly
 RUN sed -i "s/define('ENABLE_MAILER.*/define('ENABLE_MAILER', TRUE);/" /var/www/html/paths.php
