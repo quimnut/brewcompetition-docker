@@ -24,6 +24,10 @@ if [[ /data.skel/bcoem/site/MysqliDb.php -nt /data/bcoem/site/MysqliDb.php ]]; t
   cp /data/bcoem/site/MysqliDb.php /data/bcoem/site/MysqliDb.php.bak.$(date "+%Y.%m.%d-%H.%M.%S")
   cat /data.skel/bcoem/site/MysqliDb.php >/data/bcoem/site/MysqliDb.php
 fi
+if [[ /data.skel/bcoem/site/dbObject.php -nt /data/bcoem/site/dbObject.php ]]; then
+  cp /data/bcoem/site/dbObject.php /data/bcoem/site/dbObject.php.bak.$(date "+%Y.%m.%d-%H.%M.%S")
+  cat /data.skel/bcoem/site/dbObject.php >/data/bcoem/site/dbObject.php
+fi
 
 # we're a http server with a ssl proxy, strip this if it exists as it breaks barcodes
 sed -i 's|^$base_url = "http://";|$base_url = "https://";|' /var/www/html/site/config.php
