@@ -2,11 +2,13 @@
 
 http image for use behind an edge router like traefik.
 
-To import a previos comps db;
+To import a previous comps db;
 After running once to initialise, remove database directory and leave a file called loadme.sql in appdata/app/
 
 To customise bcoe&m source (like clubs list) so it's persistant across restarts
 edit custom.sh in appdata/app/
+
+To upgrade from a release older than 22 July 2022, export your database as appdata/app/loadme.sql, delete the database directory. Due to mysql 8.0 upgrade.
 
 ```
 docker build .

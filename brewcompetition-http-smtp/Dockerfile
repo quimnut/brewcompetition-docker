@@ -1,4 +1,4 @@
-FROM phusion/baseimage:bionic-1.0.0
+FROM phusion/baseimage:focal-1.2.0
 
 MAINTAINER roach@dopegoat.com
 
@@ -14,7 +14,9 @@ COPY init_scripts/get_hash.php /usr/local/bin/
 COPY init_scripts/local-libs.sh /usr/local/bin/
 COPY init_scripts/custom.sh /usr/local/bin/
 
-RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.2 php7.2-cli libapache2-mod-php7.2 php7.2-mysql php7.2-gd php7.2-curl php7.2-mbstring git wget unzip
+RUN apt-key list 2>&1 | grep -E '\/(trusted.gpg.d)' -A 3 | grep -v '^\-\-' | grep -v '^pub ' | /bin/sed 's@.*/trusted.gpg.d/\(.*\)@\1@g' | /bin/awk 'NR%2{printf "%s ",$0;next;}1' | /bin/awk '{print "apt-key export "$10$11" | gpg --dearmour -o /usr/share/keyrings/"$1}' | xargs -I'{}' bash -c "eval '{}'"
+
+RUN apt-get update && ln -s -f /bin/true /usr/bin/chfn && apt-get install --no-install-recommends -y mysql-server apache2 php7.4 php7.4-cli libapache2-mod-php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-mbstring git wget unzip
 
 COPY init_scripts/beercomp-http.conf /etc/apache2/sites-available/
 
@@ -27,7 +29,7 @@ RUN mv /var/log/apache2 /data/logs/ \
   && ln -s /data/logs/mysql /var/log/ \
   && mv /var/lib/mysql* /data/database/ \
   && find /data/database/ -mindepth 1 -maxdepth 1 -type d -exec ln -s {} /var/lib/ \; \
-  && sed -i 's/;extension=mbstring/extension=mbstring/g' /etc/php/7.2/apache2/php.ini
+  && sed -i 's/;extension=mbstring/extension=mbstring/g' /etc/php/7.4/apache2/php.ini
 
 WORKDIR "/var/www/html/"
 RUN rm -rf * \
@@ -62,3 +64,4 @@ RUN mkdir /data.skel ; mv /data/* /data.skel/
 VOLUME /data
 
 EXPOSE 80/tcp
+

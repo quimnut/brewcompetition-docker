@@ -9,7 +9,7 @@ sed -i "s/define('DEBUG_SESSION_VARS'.*/define('DEBUG_SESSION_VARS', FALSE);/" /
 # disable mysql strict mode as it fails hard on quick adding participants at least with an imported database.
 cat << EOF > /etc/mysql/conf.d/disable_strict_mode.cnf
 [mysqld]
-sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
 EOF
 
 # supress php warning
